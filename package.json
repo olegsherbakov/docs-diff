@@ -1,0 +1,11 @@
+{
+  "name": "docs-diff",
+  "version": "1.0.0",
+  "description": "Compare of html text fragments",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "oleg.sherbakov.85@gmail.com",
+  "license": "ISC"
+}
