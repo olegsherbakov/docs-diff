@@ -12,7 +12,9 @@
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/*"],
-      "@lib/*": ["src/lib/*"]
+      "@core/*": ["src/core/*"],
+      "@lib/*": ["src/lib/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

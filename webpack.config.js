@@ -1,4 +1,4 @@
-const path = require(`path`);
+const path = require('path');
 
 module.exports = {
   mode: 'development',
@@ -6,7 +6,9 @@ module.exports = {
   resolve: {
     alias: {
       src: path.resolve(__dirname, 'src/'),
+      '@core': path.resolve(__dirname, 'src/core/'),
       '@lib': path.resolve(__dirname, 'src/lib/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
     },
     extensions: ['.ts', '.tsx'],
   },
@@ -40,4 +42,9 @@ module.exports = {
     redux: 'Redux',
     'react-redux': 'ReactRedux',
   },
+
+  output: {
+    library: 'DocsDiff',
+    libraryTarget: 'var',
+  }
 };
