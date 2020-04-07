@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "develop": "webpack --watch",
-    "prod": "yarn install && yarn webpack -p && yarn prune --production",
+    "prod": "npm i && npm webpack -p && npm prune --production",
     "format": "prettier --write \"src/**/*.{tsx,ts,sccs}\"",
     "test": "echo No test specified"
   },

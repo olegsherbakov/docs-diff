@@ -17,10 +17,12 @@
 <script src="./node_modules/redux-thunk/dist/redux-thunk.js"></script>
 
 <!-- Main -->
-<script src="./dist/main.js"></script>
+<script src="./dist/index.js"></script>
 
 <script>
-    DocsDiff.default({}, document.getElementById('app'));
+    const unsubscribe = DocsDiff.default({ target: document.getElementById('app') });
+    // for destroy node use
+    // unsubscribe();
 </script>
 
 </body>

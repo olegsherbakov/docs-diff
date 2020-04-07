@@ -4,10 +4,10 @@ Compare of html text fragments interface prototype. See demo on index.html in ro
 
 # Dev
 ```
-yarn develop
+npm develop
 ```
 
 # Prod
 ```
-yarn prod
+npm prod
 ```

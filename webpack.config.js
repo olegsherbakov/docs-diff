@@ -46,5 +46,6 @@ module.exports = {
   output: {
     library: 'DocsDiff',
     libraryTarget: 'var',
+    filename: 'index.js'
   }
 };

@@ -1,17 +1,22 @@
 import * as React from 'react'
-import { Provider } from 'react-redux'
 
-import { DiffState } from '@core/types'
-import configStore from '@core/store'
-import Canvas from '@lib/Canvas'
+import Legend from '@lib/Legend'
+import List from '@lib/List'
+import Header from '@lib/Header'
+import HighlightLayer from '@lib/HighlightLayer'
+import ScrollPanel from '@lib/ScrollPanel'
+import Footer from '@lib/Footer'
 
-function Container(initialState: DiffState): JSX.Element {
-  const store = configStore(initialState)
-
+const Container: React.FC = () => {
   return (
-    <Provider store={store}>
-      <Canvas />
-    </Provider>
+    <>
+      <Legend />
+      <List />
+      <HighlightLayer />
+      <Header />
+      <ScrollPanel />
+      <Footer />
+    </>
   )
 }
 
