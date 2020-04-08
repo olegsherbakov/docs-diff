@@ -1,4 +1,5 @@
-const path = require('path');
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
@@ -29,9 +30,18 @@ module.exports = {
         test: /\.js$/,
         loader: 'source-map-loader',
       },
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ],
+      }
     ],
   },
-
+  plugins: [new MiniCssExtractPlugin()],
   // When importing a module whose path matches one of the following, just
   // assume a corresponding global variable exists and use that instead.
   // This is important because it allows us to avoid bundling all of our
@@ -42,10 +52,9 @@ module.exports = {
     redux: 'Redux',
     'react-redux': 'ReactRedux',
   },
-
   output: {
     library: 'DocsDiff',
     libraryTarget: 'var',
     filename: 'index.js'
   }
-};
+}

@@ -1,5 +1,8 @@
 import * as React from 'react'
 
+import './styles/reset.scss'
+import './styles/styles.scss'
+
 import Legend from '@lib/Legend'
 import List from '@lib/List'
 import Header from '@lib/Header'
