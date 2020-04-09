@@ -17,9 +17,10 @@ const Index: React.FC = () => {
   } = useSelector(selectSelects)
   const dispatch = useDispatch()
   const onChange = React.useCallback(
-    event => dispatch(
-      change(!!event.target.getAttribute('data-left'), +event.target.value)
-    ),
+    (event) =>
+      dispatch(
+        change(!!event.target.getAttribute('data-left'), +event.target.value)
+      ),
     [dispatch]
   )
 
