@@ -2,16 +2,16 @@ import { Reducer } from 'redux'
 
 import { SUCCESS, IList, ActionTypes } from '@core/types'
 
-export const initialState: IList = {
+const initialState: IList = {
   items: [],
 }
 
-export const reducer: Reducer<IList> = function (
+const reducer: Reducer<IList> = function (
   state: IList = initialState,
   action: ActionTypes
 ) {
   if (action.type === SUCCESS) {
-    const items = [...action.payload]
+    const items = [...action.payload.items]
 
     return { ...state, items }
   }

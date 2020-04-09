@@ -2,7 +2,7 @@ import { Reducer } from 'redux'
 
 import { LOAD, SUCCESS, FAIL, ISystem, ActionTypes } from '@core/types'
 
-export const initialState: ISystem = {
+const initialState: ISystem = {
   isLoaded: false,
   isLoading: false,
   error: ``,

@@ -6,7 +6,6 @@ import Legend from '@lib/Legend'
 import List from '@lib/List'
 import Highlight from '@lib/Highlight'
 import ScrollPanel from '@lib/ScrollPanel'
-
 import './styles.scss'
 
 const Index: React.FC = () => {

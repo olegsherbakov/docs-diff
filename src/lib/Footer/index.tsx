@@ -7,7 +7,6 @@ const Index: React.FC = () => (
     <span className="prev disable" data-shift="-1">
       « предыдущее изменение
     </span>
-
     <span className="next" data-shift="+1">
       следующее изменение »
     </span>

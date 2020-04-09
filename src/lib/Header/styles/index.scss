@@ -18,5 +18,10 @@
     width: 50%;
     float: left;
     padding-left: 36px;
+    background: url(./isnt-actual-icon.png) no-repeat center left;
+
+    &.actual {
+      background-image: url(./is-actual-icon.png);
+    }
   }
 }

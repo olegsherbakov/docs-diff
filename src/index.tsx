@@ -2,11 +2,11 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { IState, IParagraph } from '@core/types'
+import { IState, IOption } from '@core/types'
 import configStore from '@core/store'
 import App from '@lib/App'
 
-import { load, success, fail } from '@core/actions'
+import { load, fail } from '@core/actions'
 
 export interface DocsDiff {
   state?: IState
@@ -23,30 +23,43 @@ export default function ({ state, target }: DocsDiff): Function {
     target
   )
 
-  const leftId = 0, rightId = 0
+  // TODO dev test
+  const selects: [IOption[], IOption[]] = [
+      [
+        {
+          id: 1,
+          name: `doc1`,
+          isActual: false,
+        },
+        {
+          id: 2,
+          name: `doc2`,
+          isActual: false,
+        },
+      ],
+      [
+        {
+          id: 3,
+          name: `doc3`,
+          isActual: true,
+        },
+        {
+          id: 4,
+          name: `doc4`,
+          isActual: false,
+        },
+      ],
+    ],
+    leftId: number = selects[0][0].id,
+    rightId: number = selects[1][0].id
 
-  store.dispatch(load(leftId, rightId))
-
-  setTimeout(() => {
-    const paragraphs: IParagraph[] = [
-      {
-        id: 0,
-        left: `left`,
-        right: `right`,
-        length: 111,
-        isChanged: false,
-        isChecked: false,
-      },
-    ]
-
-    store.dispatch(success(paragraphs))
-  }, 3000)
+  store.dispatch(load(leftId, rightId, selects))
 
   setTimeout(() => {
     const reason = `why not?`
 
     store.dispatch(fail(reason))
-  }, 10000)
+  }, 99000)
 
   return function () {
     ReactDOM.unmountComponentAtNode(target)

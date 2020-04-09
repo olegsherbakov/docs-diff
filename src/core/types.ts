@@ -1,5 +1,6 @@
 export interface IState {
   system: ISystem
+  selects: ISelects
   list: IList
 }
 
@@ -10,6 +11,21 @@ export interface ISystem {
   title: string
   hasLeft: boolean
   hasRight: boolean
+}
+
+export interface IOption {
+  id: number
+  name: string
+  isActual: boolean
+}
+
+export interface ISelects {
+  left: IOption[]
+  leftSelected: number
+  leftIsActual: boolean
+  right: IOption[]
+  rightSelected: number
+  rightIsActual: boolean
 }
 
 export interface IList {
@@ -34,12 +50,12 @@ export const CHECK = 'CHECK'
 
 interface ILoadAction {
   type: typeof LOAD
-  payload: [number, number]
+  payload: [number, number] | [number, number, [IOption[], IOption[]]]
 }
 
 interface ISuccessAction {
   type: typeof SUCCESS
-  payload: IParagraph[]
+  payload: { items: IParagraph[] }
 }
 
 interface IFailAction {

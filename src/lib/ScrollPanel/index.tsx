@@ -6,7 +6,6 @@ import Bar from './Bar'
 const Index: React.FC = () => (
   <div className="scroll">
     <canvas />
-
     <Bar />
   </div>
 )

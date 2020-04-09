@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { selectError } from '@core/selectors'
-
 import './styles.scss'
 
 const Index: React.FC = () => {
