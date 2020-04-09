@@ -25,8 +25,6 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
     })
 
     // TODO API mock
-    console.log(`#load`)
-
     return new Promise((resolve) => {
       setTimeout(() => {
         const paragraphs: IParagraph[] = [
@@ -39,8 +37,6 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
             isChecked: false,
           },
         ]
-
-        console.log(`#success`)
 
         return resolve(dispatch(success(paragraphs)))
       }, 3000)

@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 
 import { LOAD, ISelects, ActionTypes } from '@core/types'
-import { selectsActual } from '@utils/index'
+import { selectsActual } from '@utils/.'
 
 const initialState: ISelects = {
   left: [],

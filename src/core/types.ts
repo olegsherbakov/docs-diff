@@ -70,12 +70,18 @@ interface INavigateToMatchAction {
 
 interface IResizeAction {
   type: typeof RESIZE
-  payload: { width: number; height: number }
+  payload: {
+    width: number
+    height: number
+  }
 }
 
 interface ICheckAction {
   type: typeof CHECK
-  payload: { width: number; height: number }
+  payload: {
+    width: number
+    height: number
+  }
 }
 
 export type ActionTypes =
