@@ -25,18 +25,12 @@ export interface IParagraph {
   isChecked: boolean
 }
 
-export const INIT = 'INIT'
 export const LOAD = 'LOAD'
 export const SUCCESS = 'SUCCESS'
 export const FAIL = 'FAIL'
 export const NAVIGATE = 'NAVIGATE'
 export const RESIZE = 'RESIZE'
 export const CHECK = 'CHECK'
-
-interface IInitAction {
-  type: typeof INIT
-  payload: IState | undefined
-}
 
 interface ILoadAction {
   type: typeof LOAD
@@ -69,7 +63,6 @@ interface ICheckAction {
 }
 
 export type ActionTypes =
-  | IInitAction
   | ILoadAction
   | ISuccessAction
   | IFailAction

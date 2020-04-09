@@ -1,14 +1,12 @@
 import * as React from 'react'
-
-import { IState } from '@core/types'
 import { useSelector } from 'react-redux'
+
+import { selectIsLoading } from '@core/selectors'
 
 import './styles.scss'
 
 const Index: React.FC = () => {
-  const isLoading = useSelector<IState>(
-    ({ system: { isLoading } }) => isLoading
-  )
+  const isLoading = useSelector(selectIsLoading)
 
   if (!isLoading) {
     return null

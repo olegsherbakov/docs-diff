@@ -11,7 +11,7 @@ export const reducer: Reducer<IList> = function (
   action: ActionTypes
 ) {
   if (action.type === SUCCESS) {
-    const items = { ...action.payload }
+    const items = [...action.payload]
 
     return { ...state, items }
   }
