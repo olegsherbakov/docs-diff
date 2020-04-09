@@ -7,13 +7,14 @@
     "develop": "webpack --watch",
     "prod": "npm i && npm webpack -p && npm prune --production",
     "format": "prettier --write \"src/**/*.{tsx,ts,sccs}\"",
-    "test": "echo No test specified"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Oleg Sherbakov <oleg.sherbakov.85@gmail.com>",
   "license": "ISC",
   "keywords": [
     "typescript",
     "react",
+    "redux",
     "js"
   ],
   "dependencies": {
@@ -21,7 +22,6 @@
     "@types/react-dom": "^16.9.6",
     "@types/react-redux": "^7.1.7",
     "@types/redux": "^3.6.0",
-    "@types/uuid": "^7.0.2",
     "css-loader": "^3.5.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
@@ -35,7 +35,6 @@
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
-    "uuid": "^7.0.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },

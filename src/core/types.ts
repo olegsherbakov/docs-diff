@@ -18,11 +18,11 @@ export interface IList {
 
 export interface IParagraph {
   id: number
-  changed: boolean
-  checked: boolean
   left: string
   right: string
   length: number
+  isChanged: boolean
+  isChecked: boolean
 }
 
 export const INIT = 'INIT'

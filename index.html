@@ -4,7 +4,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8" />
-    <title>Docs Diff application demo</title>
+    <title>DocsDiff application demo page</title>
     <link rel="stylesheet" type="text/css" href="./dist/main.css">
 </head>
 <body>
@@ -17,13 +17,15 @@
 <script src="./node_modules/react-redux/dist/react-redux.js"></script>
 <script src="./node_modules/redux-thunk/dist/redux-thunk.js"></script>
 
-<!-- Main -->
+<!-- DocsDiff -->
 <script src="./dist/index.js"></script>
 
 <script>
-    const unsubscribe = DocsDiff.default({ target: document.getElementById('app') });
-    // for destroy node use
-    // unsubscribe();
+  (function() {
+    DocsDiff.default({ target: document.getElementById('app') });
+    // const unsubscribe = DocsDiff.default({ target })
+    // use unsubscribe() for destroy node later
+  }());
 </script>
 
 </body>
