@@ -20,16 +20,8 @@ export const isActual = (
 
 export const isActive = (list: IParagraph[], id: number): [boolean, boolean] =>
   list.reduce(
-    (result, { id: Id }, i) => {
-      if (id === Id) {
-        const leftIsActive = i > 0
-        const rightIsActive = i < list.length - 1
-
-        return [leftIsActive, rightIsActive]
-      }
-
-      return result
-    },
+    (result, { id: Id }, i) =>
+      id === Id ? [i > 0, i < list.length - 1] : result,
     [false, false]
   )
 
@@ -37,15 +29,16 @@ export const getNextId = (
   list: IParagraph[],
   id: number,
   isPrev?: boolean
-): number => {
-  return list.reduce((result, { id: Id }, i) => {
-    if (Id === id) {
-      return isPrev ? list.slice(i - 1)[0].id : list.slice(i + 1)[0].id
-    }
-
-    return result
-  }, undefined as number)
-}
+): number =>
+  list.reduce(
+    (result, { id: Id }, i) =>
+      Id === id
+        ? isPrev
+          ? list.slice(i - 1)[0].id
+          : list.slice(i + 1)[0].id
+        : result,
+    undefined as number
+  )
 
 export const mockParagraphs = (): IParagraph[] =>
   mockData.list.map(({ id, left, right, length, changed: isChanged }) => ({
