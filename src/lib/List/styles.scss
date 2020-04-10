@@ -1,17 +1,45 @@
+@import "~@lib/_styles/variables.scss";
+
 .list {
-  &-holder {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    padding: 95px 20px 40px 0;
-  }
-  &-container {
-    position: absolute;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+  .paragraph {
+    .left,
+    .right {
+      position: relative;
+      overflow-x: hidden;
+      padding: 6px 16px;
+      width: 49%;
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    &.changed {
+      .change {
+        background-color: $green;
+      }
+      .add {
+        background-color: #c4e5fa;
+      }
+      .add,
+      .change {
+        cursor: pointer;
+      }
+    }
+    p {
+      margin: 10px 0;
+      padding: 0 0;
+      line-height: 1.25em;
+
+      &.sep {
+        margin: 2px 0;
+        padding: 0 16px;
+        clear: both;
+      }
+    }
+    a {
+      outline: none;
+    }
   }
 }

@@ -10,8 +10,45 @@ import {
   IOption,
   ActionTypes,
 } from '@core/types'
+import { mockParagraphs } from '@utils/.'
 
 type ThunkResult<T> = ThunkAction<T, IState, undefined, ActionTypes>
+
+export const init: ActionCreator<ThunkResult<Promise<ActionTypes>>> = () => {
+  return function (dispatch) {
+    // TODO API mock
+    const selects: [IOption[], IOption[]] = [
+        [
+          {
+            id: 1,
+            name: `doc1`,
+            isActual: false,
+          },
+          {
+            id: 2,
+            name: `doc2`,
+            isActual: false,
+          },
+        ],
+        [
+          {
+            id: 3,
+            name: `doc3`,
+            isActual: true,
+          },
+          {
+            id: 4,
+            name: `doc4`,
+            isActual: false,
+          },
+        ],
+      ],
+      leftId: number = selects[0][0].id,
+      rightId: number = selects[1][0].id
+
+    return dispatch(load(leftId, rightId, selects))
+  }
+}
 
 export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
   leftId: number,
@@ -27,16 +64,7 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
     // TODO API mock
     return new Promise((resolve) => {
       setTimeout(() => {
-        const paragraphs: IParagraph[] = [
-          {
-            id: 0,
-            left: `left`,
-            right: `right`,
-            length: 111,
-            isChanged: false,
-            isChecked: false,
-          },
-        ]
+        const paragraphs: IParagraph[] = mockParagraphs()
 
         return resolve(dispatch(success(paragraphs)))
       }, 3000)

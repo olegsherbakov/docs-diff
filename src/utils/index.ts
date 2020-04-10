@@ -1,4 +1,6 @@
-import { IOption } from '@core/types'
+import { IOption, IParagraph } from '@core/types'
+
+import mockData from '../data.json'
 
 export const selectsActual = (
   left: IOption[],
@@ -15,3 +17,13 @@ export const selectsActual = (
     undefined as boolean
   ),
 ]
+
+export const mockParagraphs = (): IParagraph[] =>
+  mockData.list.map(({ id, left, right, length, changed: isChanged }) => ({
+    id,
+    isChanged,
+    isChecked: true,
+    left,
+    right,
+    length,
+  }))

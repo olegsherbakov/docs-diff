@@ -16,11 +16,13 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="container">
-      <Legend />
-      <List />
-      <Highlight />
-      <ScrollPanel />
+    <div className="wrapper">
+      <div className="container">
+        <Legend />
+        <List />
+        <Highlight />
+        <ScrollPanel />
+      </div>
     </div>
   )
 }

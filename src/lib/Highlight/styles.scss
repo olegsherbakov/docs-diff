@@ -1,10 +1,10 @@
 @import "~@lib/_styles/variables.scss";
 
 .highlight {
+  display: none;
   pointer-events: none;
   position: absolute;
   width: calc(100% - 20px);
-  height: 100%;
   left: 0;
   top: 0;
 
