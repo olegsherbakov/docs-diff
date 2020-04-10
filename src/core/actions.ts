@@ -138,11 +138,9 @@ export const navigatePrev: ActionCreator<ThunkResult<ActionTypes>> = () => {
       navigate: { id, leftIsActive },
     } = getState()
 
-    if (id === undefined || !leftIsActive || !items.length) {
-      return
+    if (id !== undefined && leftIsActive && items.length) {
+      return dispatch(navigate(navigateId(items, id, true)))
     }
-
-    return dispatch(navigate(navigateId(items, id, true)))
   }
 }
 
@@ -153,10 +151,8 @@ export const navigateNext: ActionCreator<ThunkResult<ActionTypes>> = () => {
       navigate: { id, rightIsActive },
     } = getState()
 
-    if (id === undefined || !rightIsActive || !items.length) {
-      return
+    if (id !== undefined && rightIsActive && items.length) {
+      return dispatch(navigate(navigateId(items, id)))
     }
-
-    return dispatch(navigate(navigateId(items, id)))
   }
 }
