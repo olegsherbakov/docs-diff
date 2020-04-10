@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-import { LOAD, SUCCESS, FAIL, ISystem, ActionTypes } from '@core/types'
+import { ACTIONS, ISystem, ActionTypes } from '@core/types'
 
 const initialState: ISystem = {
   isLoaded: false,
@@ -16,13 +16,13 @@ const reducer: Reducer<ISystem> = function (
   action: ActionTypes
 ) {
   switch (action.type) {
-    case LOAD: {
+    case ACTIONS.LOAD: {
       return { ...state, isLoaded: false, isLoading: true }
     }
-    case SUCCESS: {
+    case ACTIONS.SUCCESS: {
       return { ...state, isLoaded: true, isLoading: false }
     }
-    case FAIL: {
+    case ACTIONS.FAIL: {
       return {
         ...state,
         isLoaded: false,

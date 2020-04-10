@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-import { LOAD, ISelects, ActionTypes } from '@core/types'
+import { ACTIONS, ISelects, ActionTypes } from '@core/types'
 import { isActual } from '@utils/.'
 
 const initialState: ISelects = {
@@ -16,7 +16,7 @@ const reducer: Reducer<ISelects> = function (
   state: ISelects = initialState,
   action: ActionTypes
 ) {
-  if (action.type === LOAD) {
+  if (action.type === ACTIONS.LOAD) {
     const [leftSelected, rightSelected, selects] = action.payload
 
     if (selects) {

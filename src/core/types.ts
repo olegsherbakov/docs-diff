@@ -55,30 +55,32 @@ export interface INavigate {
   rightIsActive: boolean
 }
 
-export const LOAD = 'LOAD'
-export const SUCCESS = 'SUCCESS'
-export const FAIL = 'FAIL'
-export const NAVIGATE = 'NAVIGATE'
-export const RESIZE = 'RESIZE'
-export const CHECK = 'CHECK'
+export enum ACTIONS {
+  LOAD,
+  SUCCESS,
+  FAIL,
+  NAVIGATE,
+  RESIZE,
+  CHECK,
+}
 
 interface ILoadAction {
-  type: typeof LOAD
+  type: typeof ACTIONS.LOAD
   payload: [number, number] | [number, number, [IOption[], IOption[]]]
 }
 
 interface ISuccessAction {
-  type: typeof SUCCESS
+  type: typeof ACTIONS.SUCCESS
   payload: { items: IParagraph[] }
 }
 
 interface IFailAction {
-  type: typeof FAIL
+  type: typeof ACTIONS.FAIL
   payload: { reason: string }
 }
 
 interface INavigateAction {
-  type: typeof NAVIGATE
+  type: typeof ACTIONS.NAVIGATE
   payload: {
     id: number
     top: number
@@ -90,7 +92,7 @@ interface INavigateAction {
 }
 
 interface IResizeAction {
-  type: typeof RESIZE
+  type: typeof ACTIONS.RESIZE
   payload: {
     width: number
     height: number
@@ -98,7 +100,7 @@ interface IResizeAction {
 }
 
 interface ICheckAction {
-  type: typeof CHECK
+  type: typeof ACTIONS.CHECK
   payload: {
     width: number
     height: number

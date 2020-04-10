@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-import { NAVIGATE, IHighlight, ActionTypes } from '@core/types'
+import { ACTIONS, IHighlight, ActionTypes } from '@core/types'
 
 const initialState: IHighlight = {
   top: undefined,
@@ -12,7 +12,7 @@ const reducer: Reducer<IHighlight> = function (
   state: IHighlight = initialState,
   action: ActionTypes
 ) {
-  if (action.type === NAVIGATE) {
+  if (action.type === ACTIONS.NAVIGATE) {
     const { top, leftHeight, rightHeight } = action.payload
 
     return { ...state, top, leftHeight, rightHeight }

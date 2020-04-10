@@ -1,16 +1,7 @@
 import { ActionCreator } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
-import {
-  LOAD,
-  SUCCESS,
-  FAIL,
-  NAVIGATE,
-  IState,
-  IParagraph,
-  IOption,
-  ActionTypes,
-} from '@core/types'
+import { ACTIONS, IState, IParagraph, IOption, ActionTypes } from '@core/types'
 import { navigateId, isActive, mockParagraphs } from '@utils/.'
 
 type ThunkResult<T> = ThunkAction<T, IState, undefined, ActionTypes>
@@ -58,7 +49,7 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
 ) => {
   return async function (dispatch) {
     await dispatch({
-      type: LOAD,
+      type: ACTIONS.LOAD,
       payload: [leftId, rightId, selects],
     })
 
@@ -74,14 +65,14 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
 }
 
 export const success: ActionCreator<ActionTypes> = (items: IParagraph[]) => ({
-  type: SUCCESS,
+  type: ACTIONS.SUCCESS,
   payload: {
     items,
   },
 })
 
 export const fail: ActionCreator<ActionTypes> = (reason: string) => ({
-  type: FAIL,
+  type: ACTIONS.FAIL,
   payload: { reason },
 })
 
@@ -129,7 +120,7 @@ export const navigate: ActionCreator<ThunkResult<ActionTypes>> = (
     }
 
     return dispatch({
-      type: NAVIGATE,
+      type: ACTIONS.NAVIGATE,
       payload: {
         id,
         leftIsActive,

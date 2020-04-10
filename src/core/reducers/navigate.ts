@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-import { NAVIGATE, INavigate, ActionTypes } from '@core/types'
+import { ACTIONS, INavigate, ActionTypes } from '@core/types'
 
 const initialState: INavigate = {
   id: undefined,
@@ -12,7 +12,7 @@ const reducer: Reducer<INavigate> = function (
   state: INavigate = initialState,
   action: ActionTypes
 ) {
-  if (action.type === NAVIGATE) {
+  if (action.type === ACTIONS.NAVIGATE) {
     const { id, leftIsActive, rightIsActive } = action.payload
 
     return { ...state, id, leftIsActive, rightIsActive }
