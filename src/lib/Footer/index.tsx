@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import cn from 'classnames'
 
 import { selectNavigate } from '@core/selectors'
-import { highlightPrev, highlightNext } from '@core/actions'
+import { navigatePrev, navigateNext } from '@core/actions'
 import './styles.scss'
 
 const Index: React.FC = () => {
   const dispatch = useDispatch()
   const { rightIsActive, leftIsActive } = useSelector(selectNavigate)
   const onClickPrev = (): void => {
-    dispatch(highlightPrev())
+    dispatch(navigatePrev())
   }
   const onClickNext = (): void => {
-    dispatch(highlightNext())
+    dispatch(navigateNext())
   }
 
   return (

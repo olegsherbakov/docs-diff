@@ -18,21 +18,24 @@ export const isActual = (
   ),
 ]
 
-export const isActive = (list: IParagraph[], id: number): [boolean, boolean] =>
+export const isActive = (
+  list: IParagraph[],
+  currentId: number
+): [boolean, boolean] =>
   list.reduce(
-    (result, { id: Id }, i) =>
-      id === Id ? [i > 0, i < list.length - 1] : result,
+    (result, { id }, i) =>
+      id === currentId ? [i > 0, i < list.length - 1] : result,
     [false, false]
   )
 
-export const getNextId = (
+export const navigateId = (
   list: IParagraph[],
-  id: number,
+  currentId: number,
   isPrev?: boolean
 ): number =>
   list.reduce(
-    (result, { id: Id }, i) =>
-      Id === id
+    (result, { id }, i) =>
+      id === currentId
         ? isPrev
           ? list.slice(i - 1)[0].id
           : list.slice(i + 1)[0].id

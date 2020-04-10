@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import cn from 'classnames'
 
-import { highlight } from '@core/actions'
+import { navigate } from '@core/actions'
 import { selectItems } from '@core/selectors'
 import './styles.scss'
 
@@ -15,12 +15,12 @@ const Index: React.FC = () => {
     const id = +currentTarget.getAttribute('data-id')
 
     if (target.tagName === 'SPAN' && /^change|add$/.test(target.className)) {
-      dispatch(highlight(id))
+      dispatch(navigate(id))
     }
   }
 
   React.useEffect(() => {
-    dispatch(highlight())
+    dispatch(navigate())
   }, [dispatch])
 
   return (
