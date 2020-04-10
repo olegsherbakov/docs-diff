@@ -11,7 +11,7 @@ import {
   IOption,
   ActionTypes,
 } from '@core/types'
-import { mockParagraphs } from '@utils/.'
+import { getNextId, isActive, mockParagraphs } from '@utils/.'
 
 type ThunkResult<T> = ThunkAction<T, IState, undefined, ActionTypes>
 
@@ -101,25 +101,68 @@ export const change: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
   }
 }
 
-export const highlight: ActionCreator<ThunkResult<ActionTypes>> = () => {
+export const highlight: ActionCreator<ThunkResult<ActionTypes>> = (
+  id?: number
+) => {
   return function (dispatch, getState) {
-    // TODO dev
-    console.log(`#highlight`)
-    const { highlight } = getState()
-    console.log(`?highlight`, highlight)
+    const {
+      list: { items },
+      navigate: { id: prevId },
+    } = getState()
 
-    if (!highlight.top) {
-      console.log(`init highlight of first part`)
+    if (prevId === id && prevId !== undefined) {
+      return
     }
+
+    const nextId = id || (items.length ? items[0].id : undefined)
+
+    if (nextId === undefined) {
+      return
+    }
+
+    const [leftIsActive, rightIsActive] = isActive(items, nextId)
 
     return dispatch({
       type: NAVIGATE,
       payload: {
-        id: 0,
+        id: nextId,
+        leftIsActive,
+        rightIsActive,
+        // TODO need calculate it
         top: 159,
         leftHeight: 52,
         rightHeight: 172,
       },
     })
+  }
+}
+
+export const highlightPrev: ActionCreator<ThunkResult<ActionTypes>> = () => {
+  return function (dispatch, getState) {
+    const {
+      list: { items },
+      navigate: { id, leftIsActive },
+    } = getState()
+
+    if (id === undefined || !leftIsActive || !items.length) {
+      return
+    }
+
+    return dispatch(highlight(getNextId(items, id, true)))
+  }
+}
+
+export const highlightNext: ActionCreator<ThunkResult<ActionTypes>> = () => {
+  return function (dispatch, getState) {
+    const {
+      list: { items },
+      navigate: { id, rightIsActive },
+    } = getState()
+
+    if (id === undefined || !rightIsActive || !items.length) {
+      return
+    }
+
+    return dispatch(highlight(getNextId(items, id)))
   }
 }

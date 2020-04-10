@@ -5,3 +5,4 @@ export const selectIsLoading = (state: IState) => state.system.isLoading
 export const selectItems = (state: IState) => state.list.items
 export const selectSelects = (state: IState) => state.selects
 export const selectHighlight = (state: IState) => state.highlight
+export const selectNavigate = (state: IState) => state.navigate

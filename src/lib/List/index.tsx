@@ -9,6 +9,15 @@ import './styles.scss'
 const Index: React.FC = () => {
   const items = useSelector(selectItems)
   const dispatch = useDispatch()
+  const onClick = (event: React.SyntheticEvent<EventTarget>): void => {
+    const target = event.target as HTMLElement
+    const currentTarget = event.currentTarget as HTMLElement
+    const id = +currentTarget.getAttribute('data-id')
+
+    if (target.tagName === 'SPAN' && /^change|add$/.test(target.className)) {
+      dispatch(highlight(id))
+    }
+  }
 
   React.useEffect(() => {
     dispatch(highlight())
@@ -17,7 +26,12 @@ const Index: React.FC = () => {
   return (
     <div className="list">
       {items.map(({ id, left, right, isChanged }) => (
-        <div className={cn({ paragraph: true, changed: isChanged })} key={id}>
+        <div
+          key={id}
+          data-id={id}
+          onClick={onClick}
+          className={cn({ paragraph: true, changed: isChanged })}
+        >
           <div
             className="left"
             dangerouslySetInnerHTML={{

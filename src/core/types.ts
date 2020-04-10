@@ -3,6 +3,7 @@ export interface IState {
   selects: ISelects
   list: IList
   highlight: IHighlight
+  navigate: INavigate
 }
 
 export interface ISystem {
@@ -48,6 +49,12 @@ export interface IHighlight {
   rightHeight: number
 }
 
+export interface INavigate {
+  id: number
+  leftIsActive: boolean
+  rightIsActive: boolean
+}
+
 export const LOAD = 'LOAD'
 export const SUCCESS = 'SUCCESS'
 export const FAIL = 'FAIL'
@@ -77,6 +84,8 @@ interface INavigateAction {
     top: number
     leftHeight: number
     rightHeight: number
+    leftIsActive: boolean
+    rightIsActive: boolean
   }
 }
 

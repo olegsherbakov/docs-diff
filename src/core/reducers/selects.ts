@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 
 import { LOAD, ISelects, ActionTypes } from '@core/types'
-import { selectsActual } from '@utils/.'
+import { isActual } from '@utils/.'
 
 const initialState: ISelects = {
   left: [],
@@ -21,7 +21,7 @@ const reducer: Reducer<ISelects> = function (
 
     if (selects) {
       const [left, right] = selects
-      const [leftIsActual, rightIsActual] = selectsActual(
+      const [leftIsActual, rightIsActual] = isActual(
         left,
         leftSelected,
         right,
@@ -39,7 +39,7 @@ const reducer: Reducer<ISelects> = function (
       }
     }
 
-    const [leftIsActual, rightIsActual] = selectsActual(
+    const [leftIsActual, rightIsActual] = isActual(
       state.left,
       leftSelected,
       state.right,
