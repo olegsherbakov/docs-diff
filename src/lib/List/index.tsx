@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import cn from 'classnames'
 
+import { highlight } from '@core/actions'
 import { selectItems } from '@core/selectors'
 import './styles.scss'
 
 const Index: React.FC = () => {
   const items = useSelector(selectItems)
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(highlight())
+  }, [dispatch])
 
   return (
     <div className="list">

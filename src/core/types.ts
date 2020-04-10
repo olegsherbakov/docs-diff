@@ -2,6 +2,7 @@ export interface IState {
   system: ISystem
   selects: ISelects
   list: IList
+  highlight: IHighlight
 }
 
 export interface ISystem {
@@ -41,6 +42,12 @@ export interface IParagraph {
   isChecked: boolean
 }
 
+export interface IHighlight {
+  top: number
+  leftHeight: number
+  rightHeight: number
+}
+
 export const LOAD = 'LOAD'
 export const SUCCESS = 'SUCCESS'
 export const FAIL = 'FAIL'
@@ -63,9 +70,14 @@ interface IFailAction {
   payload: { reason: string }
 }
 
-interface INavigateToMatchAction {
+interface INavigateAction {
   type: typeof NAVIGATE
-  payload: { id: string }
+  payload: {
+    id: number
+    top: number
+    leftHeight: number
+    rightHeight: number
+  }
 }
 
 interface IResizeAction {
@@ -88,6 +100,6 @@ export type ActionTypes =
   | ILoadAction
   | ISuccessAction
   | IFailAction
-  | INavigateToMatchAction
+  | INavigateAction
   | IResizeAction
   | ICheckAction

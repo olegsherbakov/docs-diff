@@ -19,8 +19,8 @@ const Index: React.FC = () => {
     <div className="wrapper">
       <div className="container">
         <Legend />
-        <List />
         <Highlight />
+        <List />
         <ScrollPanel />
       </div>
     </div>

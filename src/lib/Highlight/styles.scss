@@ -1,7 +1,6 @@
 @import "~@lib/_styles/variables.scss";
 
 .highlight {
-  display: none;
   pointer-events: none;
   position: absolute;
   width: calc(100% - 20px);

@@ -5,6 +5,7 @@ import {
   LOAD,
   SUCCESS,
   FAIL,
+  NAVIGATE,
   IState,
   IParagraph,
   IOption,
@@ -67,7 +68,7 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
         const paragraphs: IParagraph[] = mockParagraphs()
 
         return resolve(dispatch(success(paragraphs)))
-      }, 3000)
+      }, 1111)
     })
   }
 }
@@ -97,5 +98,28 @@ export const change: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
       : [leftSelected, id]
 
     return dispatch(load(leftId, rightId))
+  }
+}
+
+export const highlight: ActionCreator<ThunkResult<ActionTypes>> = () => {
+  return function (dispatch, getState) {
+    // TODO dev
+    console.log(`#highlight`)
+    const { highlight } = getState()
+    console.log(`?highlight`, highlight)
+
+    if (!highlight.top) {
+      console.log(`init highlight of first part`)
+    }
+
+    return dispatch({
+      type: NAVIGATE,
+      payload: {
+        id: 0,
+        top: 159,
+        leftHeight: 52,
+        rightHeight: 172,
+      },
+    })
   }
 }
