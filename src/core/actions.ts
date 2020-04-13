@@ -2,7 +2,7 @@ import { ActionCreator } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
 import { ACTIONS, IState, IParagraph, IOption, ActionTypes } from '@core/types'
-import { navigateId, isActive, mockParagraphs } from '@utils/.'
+import { changedMap, navigateId, isActive, mockParagraphs } from '@utils/.'
 
 type ThunkResult<T> = ThunkAction<T, IState, undefined, ActionTypes>
 
@@ -105,13 +105,14 @@ export const navigate: ActionCreator<ThunkResult<ActionTypes>> = (
       return
     }
 
-    const id = nextId || (items.length ? items[0].id : undefined)
+    const changed = changedMap(items)
+    const id = nextId || (changed.length ? changed[0] : undefined)
 
     if (id === undefined) {
       return
     }
 
-    const [leftIsActive, rightIsActive] = isActive(items, id)
+    const [leftIsActive, rightIsActive] = isActive(changed, id)
 
     return dispatch({
       type: ACTIONS.NAVIGATE,
@@ -132,7 +133,7 @@ export const navigatePrev: ActionCreator<ThunkResult<ActionTypes>> = () => {
     } = getState()
 
     if (id !== undefined && leftIsActive && items.length) {
-      return dispatch(navigate(navigateId(items, id, true)))
+      return dispatch(navigate(navigateId(changedMap(items), id, true)))
     }
   }
 }
@@ -145,7 +146,7 @@ export const navigateNext: ActionCreator<ThunkResult<ActionTypes>> = () => {
     } = getState()
 
     if (id !== undefined && rightIsActive && items.length) {
-      return dispatch(navigate(navigateId(items, id)))
+      return dispatch(navigate(navigateId(changedMap(items), id)))
     }
   }
 }

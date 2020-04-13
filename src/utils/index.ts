@@ -18,27 +18,36 @@ export const isActual = (
   ),
 ]
 
+export const changedMap = (items: IParagraph[]): number[] =>
+  items.reduce((r, p) => {
+    if (p.isChanged) {
+      r.push(p.id)
+    }
+
+    return r
+  }, [])
+
 export const isActive = (
-  list: IParagraph[],
+  list: number[],
   currentId: number
 ): [boolean, boolean] =>
   list.reduce(
-    (result, { id }, i) =>
+    (result, id, i) =>
       id === currentId ? [i > 0, i < list.length - 1] : result,
     [false, false]
   )
 
 export const navigateId = (
-  list: IParagraph[],
+  list: number[],
   currentId: number,
   isPrev?: boolean
 ): number =>
   list.reduce(
-    (result, { id }, i) =>
+    (result, id, i) =>
       id === currentId
         ? isPrev
-          ? list.slice(i - 1)[0].id
-          : list.slice(i + 1)[0].id
+          ? list.slice(i - 1)[0]
+          : list.slice(i + 1)[0]
         : result,
     undefined as number
   )
