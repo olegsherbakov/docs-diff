@@ -112,12 +112,6 @@ export const navigate: ActionCreator<ThunkResult<ActionTypes>> = (
     }
 
     const [leftIsActive, rightIsActive] = isActive(items, id)
-    // TODO dev
-    const highlight = {
-      top: 159,
-      leftHeight: 52,
-      rightHeight: 172,
-    }
 
     return dispatch({
       type: ACTIONS.NAVIGATE,
@@ -125,7 +119,6 @@ export const navigate: ActionCreator<ThunkResult<ActionTypes>> = (
         id,
         leftIsActive,
         rightIsActive,
-        ...highlight,
       },
     })
   }
@@ -154,5 +147,20 @@ export const navigateNext: ActionCreator<ThunkResult<ActionTypes>> = () => {
     if (id !== undefined && rightIsActive && items.length) {
       return dispatch(navigate(navigateId(items, id)))
     }
+  }
+}
+
+export const highlight: ActionCreator<ActionTypes> = (
+  top: number,
+  leftHeight: number,
+  rightHeight: number
+) => {
+  return {
+    type: ACTIONS.HIGHLIGHT,
+    payload: {
+      top,
+      leftHeight,
+      rightHeight,
+    },
   }
 }

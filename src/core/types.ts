@@ -62,6 +62,7 @@ export enum ACTIONS {
   NAVIGATE,
   RESIZE,
   CHECK,
+  HIGHLIGHT,
 }
 
 interface ILoadAction {
@@ -83,11 +84,17 @@ interface INavigateAction {
   type: typeof ACTIONS.NAVIGATE
   payload: {
     id: number
+    leftIsActive: boolean
+    rightIsActive: boolean
+  }
+}
+
+interface IHighlightAction {
+  type: typeof ACTIONS.HIGHLIGHT
+  payload: {
     top: number
     leftHeight: number
     rightHeight: number
-    leftIsActive: boolean
-    rightIsActive: boolean
   }
 }
 
@@ -112,5 +119,6 @@ export type ActionTypes =
   | ISuccessAction
   | IFailAction
   | INavigateAction
+  | IHighlightAction
   | IResizeAction
   | ICheckAction

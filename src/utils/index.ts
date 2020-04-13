@@ -43,6 +43,27 @@ export const navigateId = (
     undefined as number
   )
 
+interface INavigateInfo {
+  top: number
+  left: number
+  right: number
+}
+
+// TODO dev
+export const navigateInfo = (div: HTMLDivElement): INavigateInfo => {
+  const leftElement = div.childNodes[0] as HTMLDivElement
+  const left = leftElement ? leftElement.clientHeight : undefined
+  const rightElement = div.childNodes[1] as HTMLDivElement
+  const right = rightElement ? rightElement.clientHeight : undefined
+  const top = div.offsetTop
+
+  return {
+    top,
+    left,
+    right,
+  }
+}
+
 export const mockParagraphs = (): IParagraph[] =>
   mockData.list.map(({ id, left, right, length, changed: isChanged }) => ({
     id,

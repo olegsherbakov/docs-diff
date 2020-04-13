@@ -12,7 +12,7 @@ const reducer: Reducer<IHighlight> = function (
   state: IHighlight = initialState,
   action: ActionTypes
 ) {
-  if (action.type === ACTIONS.NAVIGATE) {
+  if (action.type === ACTIONS.HIGHLIGHT) {
     const { top, leftHeight, rightHeight } = action.payload
 
     return { ...state, top, leftHeight, rightHeight }

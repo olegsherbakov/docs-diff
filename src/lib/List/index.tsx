@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import cn from 'classnames'
 
 import { navigate } from '@core/actions'
-import { selectItems } from '@core/selectors'
+import { selectItems, selectNavigate } from '@core/selectors'
 import './styles.scss'
 
-const Index: React.FC = () => {
+const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
   const items = useSelector(selectItems)
+  const { id: navigateId } = useSelector(selectNavigate)
   const dispatch = useDispatch()
   const onClick = (event: React.SyntheticEvent<EventTarget>): void => {
     const target = event.target as HTMLElement
@@ -19,7 +20,7 @@ const Index: React.FC = () => {
     }
   }
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     dispatch(navigate())
   }, [dispatch])
 
@@ -31,6 +32,7 @@ const Index: React.FC = () => {
           data-id={id}
           onClick={onClick}
           className={cn({ paragraph: true, changed: isChanged })}
+          ref={navigateId === id ? ref : undefined}
         >
           <div
             className="left"
@@ -49,6 +51,6 @@ const Index: React.FC = () => {
       ))}
     </div>
   )
-}
+})
 
 export default Index
