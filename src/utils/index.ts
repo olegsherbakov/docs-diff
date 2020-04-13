@@ -73,6 +73,22 @@ export const navigateInfo = (div: HTMLDivElement): INavigateInfo => {
   }
 }
 
+export const scrollTo = (
+  container: HTMLDivElement,
+  current: HTMLDivElement
+): void => {
+  const offset = Math.max(
+    0,
+    current.offsetTop - Math.floor(container.clientHeight / 4)
+  )
+
+  if (container.scrollTop !== offset) {
+    requestAnimationFrame(() => {
+      container.scrollTop = offset
+    })
+  }
+}
+
 export const mockParagraphs = (): IParagraph[] =>
   mockData.list.map(({ id, left, right, length, changed: isChanged }) => ({
     id,

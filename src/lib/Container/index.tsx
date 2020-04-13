@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { selectError, selectNavigate } from '@core/selectors'
 import { highlight } from '@core/actions'
-import { navigateInfo } from '@utils/.'
+import { navigateInfo, scrollTo } from '@utils/.'
 import Legend from '@lib/Legend'
 import List from '@lib/List'
 import Highlight from '@lib/Highlight'
@@ -14,6 +14,7 @@ const Index: React.FC = () => {
   const dispatch = useDispatch()
   const error = useSelector(selectError)
   const { id: navigateId } = useSelector(selectNavigate)
+  const containerRef = React.useRef<HTMLDivElement>(null)
   const currentRef = React.useRef<HTMLDivElement>(null)
 
   React.useLayoutEffect(() => {
@@ -24,13 +25,19 @@ const Index: React.FC = () => {
     }
   }, [dispatch, navigateId])
 
+  React.useLayoutEffect(() => {
+    if (navigateId && containerRef.current && currentRef.current) {
+      scrollTo(containerRef.current, currentRef.current)
+    }
+  }, [navigateId])
+
   if (error) {
     return null
   }
 
   return (
     <div className="wrapper">
-      <div className="container">
+      <div className="container" ref={containerRef}>
         <Legend />
         <Highlight />
         <List ref={currentRef} />
