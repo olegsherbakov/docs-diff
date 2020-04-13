@@ -7,9 +7,9 @@ import { selectItems, selectNavigate } from '@core/selectors'
 import './styles.scss'
 
 const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
+  const dispatch = useDispatch()
   const items = useSelector(selectItems)
   const { id: navigateId } = useSelector(selectNavigate)
-  const dispatch = useDispatch()
   const onClick = (event: React.SyntheticEvent<EventTarget>): void => {
     const target = event.target as HTMLElement
     const currentTarget = event.currentTarget as HTMLElement

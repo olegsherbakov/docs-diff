@@ -10,20 +10,27 @@ import Highlight from '@lib/Highlight'
 import ScrollPanel from '@lib/ScrollPanel'
 import './styles.scss'
 
-const Index: React.FC = () => {
+interface IContainer {
+  ignored: number
+}
+
+const Index: React.FC<IContainer> = ({ ignored }) => {
   const dispatch = useDispatch()
   const error = useSelector(selectError)
   const { id: navigateId } = useSelector(selectNavigate)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const currentRef = React.useRef<HTMLDivElement>(null)
-
-  React.useLayoutEffect(() => {
+  const redrawHighlight = React.useCallback(() => {
     if (currentRef.current) {
       const navigate = navigateInfo(currentRef.current)
 
       dispatch(highlight(navigate.top, navigate.left, navigate.right))
     }
-  }, [dispatch, navigateId])
+  }, [dispatch])
+
+  React.useLayoutEffect(() => {
+    redrawHighlight()
+  }, [navigateId, ignored])
 
   React.useLayoutEffect(() => {
     if (navigateId && containerRef.current && currentRef.current) {

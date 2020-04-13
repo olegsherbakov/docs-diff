@@ -22,7 +22,22 @@
 
 <script>
   (function() {
-    DocsDiff.default({ target: document.getElementById('app') });
+    var _resize;
+
+    function onResize() {
+      if (_resize) {
+        _resize();
+      }
+    }
+
+    window.addEventListener(`resize`, onResize)
+
+    DocsDiff.default({
+      target: document.getElementById('app'),
+      useResize: function(resize) {
+        _resize = resize;
+      }
+    });
     // const unsubscribe = DocsDiff.default({ target })
     // use unsubscribe() for destroy node later
   }());

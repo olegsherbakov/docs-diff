@@ -11,12 +11,21 @@ import Progress from '@lib/Progress'
 import Footer from '@lib/Footer'
 import Errors from '@lib/Errors'
 
-const App: React.FC = () => {
-  const isLoading = useSelector(selectIsLoading)
+interface IApp {
+  useResize?: Function
+}
+
+const App: React.FC<IApp> = ({ useResize }) => {
   const dispatch = useDispatch()
+  const isLoading = useSelector(selectIsLoading)
+  const [ignored, forceUpdate] = React.useReducer((x) => x + 1, 0)
 
   React.useLayoutEffect(() => {
     dispatch(init())
+
+    if (useResize) {
+      useResize(forceUpdate)
+    }
   }, [dispatch])
 
   if (isLoading) {
@@ -25,7 +34,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Container />
+      <Container ignored={ignored} />
       <Header />
       <Footer />
       <Errors />

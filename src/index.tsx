@@ -9,14 +9,15 @@ import App from '@lib/App'
 export interface DocsDiff {
   state?: IState
   target: HTMLElement
+  useResize?: Function
 }
 
-export default function ({ state, target }: DocsDiff): Function {
+export default function ({ state, useResize, target }: DocsDiff): Function {
   const store = configStore(state)
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <App useResize={useResize} />
     </Provider>,
     target
   )
