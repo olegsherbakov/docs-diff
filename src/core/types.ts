@@ -4,6 +4,7 @@ export interface IState {
   list: IList
   highlight: IHighlight
   navigate: INavigate
+  scroll: IScroll
 }
 
 export interface ISystem {
@@ -55,14 +56,24 @@ export interface INavigate {
   rightIsActive: boolean
 }
 
+export interface IScroll {
+  map: IPosition[]
+}
+
+export interface IPosition {
+  top: number
+  height: number
+  className: 'add' | `change`
+}
+
 export enum ACTIONS {
   LOAD,
   SUCCESS,
   FAIL,
   NAVIGATE,
-  RESIZE,
   CHECK,
   HIGHLIGHT,
+  SCROLLMAP,
 }
 
 interface ILoadAction {
@@ -98,12 +109,9 @@ interface IHighlightAction {
   }
 }
 
-interface IResizeAction {
-  type: typeof ACTIONS.RESIZE
-  payload: {
-    width: number
-    height: number
-  }
+interface IScrollmapAction {
+  type: typeof ACTIONS.SCROLLMAP
+  payload: IPosition[]
 }
 
 interface ICheckAction {
@@ -120,5 +128,5 @@ export type ActionTypes =
   | IFailAction
   | INavigateAction
   | IHighlightAction
-  | IResizeAction
+  | IScrollmapAction
   | ICheckAction

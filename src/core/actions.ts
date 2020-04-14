@@ -165,3 +165,8 @@ export const highlight: ActionCreator<ActionTypes> = (
     },
   }
 }
+
+export const scrollmap: ActionCreator<ActionTypes> = (map) => ({
+  type: ACTIONS.SCROLLMAP,
+  payload: map,
+})

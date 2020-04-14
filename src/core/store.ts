@@ -7,6 +7,7 @@ import selects from '@core/reducers/selects'
 import list from '@core/reducers/list'
 import highlight from '@core/reducers/highlight'
 import navigate from '@core/reducers/navigate'
+import scroll from '@core/reducers/scroll'
 
 export default function configStore(state: IState): Store<IState> {
   return createStore(
@@ -16,6 +17,7 @@ export default function configStore(state: IState): Store<IState> {
       list,
       highlight,
       navigate,
+      scroll,
     }),
     state,
     applyMiddleware(thunk)

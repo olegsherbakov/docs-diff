@@ -6,3 +6,4 @@ export const selectItems = (state: IState) => state.list.items
 export const selectSelects = (state: IState) => state.selects
 export const selectHighlight = (state: IState) => state.highlight
 export const selectNavigate = (state: IState) => state.navigate
+export const selectScroll = (state: IState) => state.scroll

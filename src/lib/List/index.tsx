@@ -30,6 +30,7 @@ const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
         <div
           key={id}
           data-id={id}
+          data-paragraph={true}
           onClick={onClick}
           className={cn({ paragraph: true, changed: isChanged })}
           ref={navigateId === id ? ref : undefined}

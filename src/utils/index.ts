@@ -1,4 +1,4 @@
-import { IOption, IParagraph } from '@core/types'
+import { IOption, IParagraph, IPosition } from '@core/types'
 
 import mockData from '../data.json'
 
@@ -86,6 +86,61 @@ export const scrollTo = (
       container.scrollTop = offset
     })
   }
+}
+
+export const closestParagraph = (element: HTMLElement): HTMLElement | null => {
+  let node: HTMLElement = element
+
+  while (node) {
+    if (node.getAttribute('data-paragraph')) {
+      return node
+    } else {
+      node = node.parentElement
+    }
+  }
+
+  return null
+}
+
+export const positionsOfChanged = (container: HTMLDivElement): IPosition[] => {
+  const diffs = container.querySelectorAll<HTMLSpanElement>(
+    '.list .changed .change, .list .changed .add'
+  )
+  const scrollStep = container.scrollHeight
+
+  return [...diffs].map((el) => {
+    const p = closestParagraph(el)
+
+    return {
+      top: (el.offsetTop + p.offsetTop) / scrollStep,
+      height: el.offsetHeight / scrollStep,
+      className: el.className === 'add' ? 'add' : 'change',
+    }
+  })
+}
+
+export const drawMap = (
+  container: HTMLDivElement,
+  canvas: HTMLCanvasElement,
+  map: IPosition[]
+): void => {
+  canvas.height = container.offsetHeight
+
+  const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+  const width: number = canvas.width
+  const scrollShift: number = canvas.height
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  map.forEach((position) => {
+    const top = position.top * scrollShift
+    const height = position.height * scrollShift
+
+    ctx.fillStyle = position.className === 'add' ? '#008EBA' : '#4eb276'
+    // move rectangle 1px up and increase it height by 2px
+    // because we need to paste changed blocks together (without gutter)
+    ctx.fillRect(0, top - 1, width, height + 2)
+  })
 }
 
 export const mockParagraphs = (): IParagraph[] =>

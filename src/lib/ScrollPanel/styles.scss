@@ -2,7 +2,7 @@
 
 .scroll {
   pointer-events: none;
-  opacity: .4;
+  opacity: .5;
   position: fixed;
   height: calc(100% - 80px);
   top: 40px;
@@ -16,5 +16,8 @@
     background-color: orangeRed;
     opacity: 0.6;
     width: 100%;
+  }
+  canvas {
+    height: 100%;
   }
 }

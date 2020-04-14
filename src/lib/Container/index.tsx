@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectError, selectNavigate } from '@core/selectors'
-import { highlight } from '@core/actions'
-import { navigateInfo, scrollTo } from '@utils/.'
+import { selectError, selectNavigate, selectItems } from '@core/selectors'
+import { highlight, scrollmap } from '@core/actions'
+import { navigateInfo, scrollTo, positionsOfChanged } from '@utils/.'
 import Legend from '@lib/Legend'
 import List from '@lib/List'
 import Highlight from '@lib/Highlight'
@@ -17,6 +17,7 @@ interface IContainer {
 const Index: React.FC<IContainer> = ({ ignored }) => {
   const dispatch = useDispatch()
   const error = useSelector(selectError)
+  const items = useSelector(selectItems)
   const { id: navigateId } = useSelector(selectNavigate)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const currentRef = React.useRef<HTMLDivElement>(null)
@@ -37,6 +38,12 @@ const Index: React.FC<IContainer> = ({ ignored }) => {
       scrollTo(containerRef.current, currentRef.current)
     }
   }, [navigateId])
+
+  React.useLayoutEffect(() => {
+    if (items.length) {
+      dispatch(scrollmap(positionsOfChanged(containerRef.current)))
+    }
+  }, [items, ignored])
 
   if (error) {
     return null
