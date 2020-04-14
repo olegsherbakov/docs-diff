@@ -22,24 +22,21 @@
 
 <script>
   (function() {
-    var _resize;
-
-    function onResize() {
-      if (_resize) {
-        _resize();
-      }
-    }
-
-    window.addEventListener(`resize`, onResize)
-
     DocsDiff.default({
       target: document.getElementById('app'),
-      useResize: function(resize) {
-        _resize = resize;
+      onCreate: function(forceUpdate) {
+        window.addEventListener(`resize`, forceUpdate);
+
+        return function(target) {
+          console.log('target before unmount the component', target);
+
+          window.removeEventListener(`resize`, forceUpdate);
+        }
       }
     });
-    // const unsubscribe = DocsDiff.default({ target })
-    // use unsubscribe() for destroy node later
+
+    // const destroy = DocsDiff.default({ target, ...props })
+    // use destroy() for unsubscribe events
   }());
 </script>
 

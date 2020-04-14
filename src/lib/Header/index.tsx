@@ -7,6 +7,7 @@ import { change } from '@core/actions'
 import './styles/index.scss'
 
 const Index: React.FC = () => {
+  const dispatch = useDispatch()
   const {
     left,
     leftSelected,
@@ -15,7 +16,6 @@ const Index: React.FC = () => {
     rightSelected,
     rightIsActual,
   } = useSelector(selectSelects)
-  const dispatch = useDispatch()
   const onChange = React.useCallback(
     (event) =>
       dispatch(

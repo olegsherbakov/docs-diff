@@ -9,20 +9,28 @@ import App from '@lib/App'
 export interface DocsDiff {
   state?: IState
   target: HTMLElement
-  useResize?: Function
+  onCreate?: Function
 }
 
-export default function ({ state, useResize, target }: DocsDiff): Function {
+export default function ({ state, onCreate, target }: DocsDiff): Function {
+  let destroyFn: Function | undefined
   const store = configStore(state)
+  const hookUpdate = (forceUpdate: Function): void => {
+    destroyFn = onCreate(forceUpdate)
+  }
 
   ReactDOM.render(
     <Provider store={store}>
-      <App useResize={useResize} />
+      <App hookUpdate={hookUpdate} />
     </Provider>,
     target
   )
 
   return function () {
+    if (destroyFn) {
+      destroyFn(target)
+    }
+
     ReactDOM.unmountComponentAtNode(target)
   }
 }

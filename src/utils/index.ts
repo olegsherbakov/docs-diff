@@ -58,7 +58,6 @@ interface INavigateInfo {
   right: number
 }
 
-// TODO dev
 export const navigateInfo = (div: HTMLDivElement): INavigateInfo => {
   const leftElement = div.childNodes[0] as HTMLDivElement
   const left = leftElement ? leftElement.clientHeight : undefined

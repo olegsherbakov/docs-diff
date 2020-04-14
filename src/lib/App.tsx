@@ -12,10 +12,10 @@ import Footer from '@lib/Footer'
 import Errors from '@lib/Errors'
 
 interface IApp {
-  useResize?: Function
+  hookUpdate: Function
 }
 
-const App: React.FC<IApp> = ({ useResize }) => {
+const App: React.FC<IApp> = ({ hookUpdate }) => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
   const [ignored, forceUpdate] = React.useReducer((x) => x + 1, 0)
@@ -23,9 +23,7 @@ const App: React.FC<IApp> = ({ useResize }) => {
   React.useLayoutEffect(() => {
     dispatch(init())
 
-    if (useResize) {
-      useResize(forceUpdate)
-    }
+    hookUpdate(() => forceUpdate())
   }, [dispatch])
 
   if (isLoading) {
