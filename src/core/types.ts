@@ -130,3 +130,8 @@ export type ActionTypes =
   | IHighlightAction
   | IScrollmapAction
   | ICheckAction
+
+export interface IApi extends Object {
+  getSelects(): Promise<[[IOption[], IOption[]], number, number]>
+  getList(leftId: number, rightId: number): Promise<IParagraph[]>
+}

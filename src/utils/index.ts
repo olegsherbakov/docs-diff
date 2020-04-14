@@ -1,7 +1,5 @@
 import { IOption, IParagraph, IPosition } from '@core/types'
 
-import mockData from '../data.json'
-
 export const isActual = (
   left: IOption[],
   leftSelected: number,
@@ -136,19 +134,9 @@ export const drawMap = (
     const top = position.top * scrollShift
     const height = position.height * scrollShift
 
-    ctx.fillStyle = position.className === 'add' ? '#008EBA' : '#4eb276'
+    ctx.fillStyle = position.className === 'add' ? '#008ebA' : '#4eb276'
     // move rectangle 1px up and increase it height by 2px
     // because we need to paste changed blocks together (without gutter)
     ctx.fillRect(0, top - 1, width, height + 2)
   })
 }
-
-export const mockParagraphs = (): IParagraph[] =>
-  mockData.list.map(({ id, left, right, length, changed: isChanged }) => ({
-    id,
-    isChanged,
-    isChecked: true,
-    left,
-    right,
-    length,
-  }))

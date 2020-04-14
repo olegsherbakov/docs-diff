@@ -1,42 +1,21 @@
 import { ActionCreator } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 
-import { ACTIONS, IState, IParagraph, IOption, ActionTypes } from '@core/types'
-import { changedMap, navigateId, isActive, mockParagraphs } from '@utils/.'
+import {
+  ACTIONS,
+  IState,
+  IApi,
+  IParagraph,
+  IOption,
+  ActionTypes,
+} from '@core/types'
+import { changedMap, navigateId, isActive } from '@utils/.'
 
-type ThunkResult<T> = ThunkAction<T, IState, undefined, ActionTypes>
+type ThunkResult<T> = ThunkAction<T, IState, IApi, ActionTypes>
 
 export const init: ActionCreator<ThunkResult<Promise<ActionTypes>>> = () => {
-  return function (dispatch) {
-    // TODO API mock
-    const selects: [IOption[], IOption[]] = [
-        [
-          {
-            id: 1,
-            name: `doc1`,
-            isActual: false,
-          },
-          {
-            id: 2,
-            name: `doc2`,
-            isActual: false,
-          },
-        ],
-        [
-          {
-            id: 3,
-            name: `doc3`,
-            isActual: true,
-          },
-          {
-            id: 4,
-            name: `doc4`,
-            isActual: false,
-          },
-        ],
-      ],
-      leftId: number = selects[0][0].id,
-      rightId: number = selects[1][0].id
+  return async function (dispatch, getState, api) {
+    const [selects, leftId, rightId] = await api.getSelects()
 
     return dispatch(load(leftId, rightId, selects))
   }
@@ -47,20 +26,15 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
   rightId: number,
   selects?: [IOption[], IOption[]]
 ) => {
-  return async function (dispatch) {
+  return async function (dispatch, getState, api) {
     await dispatch({
       type: ACTIONS.LOAD,
       payload: [leftId, rightId, selects],
     })
 
-    // TODO API mock
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const paragraphs: IParagraph[] = mockParagraphs()
+    const paragraphs: IParagraph[] = await api.getList(leftId, rightId)
 
-        return resolve(dispatch(success(paragraphs)))
-      }, 1111)
-    })
+    return dispatch(success(paragraphs))
   }
 }
 
