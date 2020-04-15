@@ -134,3 +134,6 @@ export const drawMap = (
     ctx.fillRect(0, top - 1, width, height + 2)
   })
 }
+
+export const isMark = (element: HTMLElement): boolean =>
+  element.tagName === 'SPAN' && /^change|add$/.test(element.className)

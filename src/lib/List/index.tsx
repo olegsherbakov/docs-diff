@@ -4,6 +4,7 @@ import cn from 'classnames'
 
 import { navigate } from '@core/actions'
 import { selectItems, selectNavigate } from '@core/selectors'
+import { isMark } from '@utils/.'
 import './styles.scss'
 
 const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
@@ -11,12 +12,10 @@ const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
   const items = useSelector(selectItems)
   const { id: navigateId } = useSelector(selectNavigate)
   const onClick = (event: React.SyntheticEvent<EventTarget>): void => {
-    const target = event.target as HTMLElement
-    const currentTarget = event.currentTarget as HTMLElement
-    const id = +currentTarget.getAttribute('data-id')
+    if (isMark(event.target as HTMLElement)) {
+      const currentTarget = event.currentTarget as HTMLElement
 
-    if (target.tagName === 'SPAN' && /^change|add$/.test(target.className)) {
-      dispatch(navigate(id))
+      dispatch(navigate(+currentTarget.getAttribute('data-id')))
     }
   }
 
