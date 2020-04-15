@@ -1,7 +1,7 @@
 export interface IDocsDiff {
   state?: IState
   target: HTMLElement
-  onCreate?: Function
+  onCreate: Function
   loadSelects?: Function
   loadList: Function
 }
@@ -153,6 +153,17 @@ export type ActionTypes =
   | ICheckAction
 
 export interface IApi extends Object {
-  getSelects(): Promise<[[IOption[], IOption[]], number, number]>
-  getList(leftId: number, rightId: number): Promise<IParagraph[]>
+  onCreate(
+    forceUpdate: Function,
+    navigatePrev: Function,
+    navigateNext: Function
+  ): void
+  getSelects(
+    failFn: Function
+  ): Promise<[[IOption[], IOption[]], number, number]>
+  getList(
+    leftId: number,
+    rightId: number,
+    failFn: Function
+  ): Promise<IParagraph[]>
 }

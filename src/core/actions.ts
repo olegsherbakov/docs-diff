@@ -16,7 +16,15 @@ type ThunkResult<T> = ThunkAction<T, IState, IApi, ActionTypes>
 
 export const init: ActionCreator<ThunkResult<Promise<ActionTypes>>> = () => {
   return async function (dispatch, getState, api) {
-    const [selects, leftId, rightId] = await api.getSelects()
+    api.onCreate(
+      () => dispatch(forceUpdate()),
+      () => dispatch(navigatePrev()),
+      () => dispatch(navigateNext())
+    )
+
+    const [selects, leftId, rightId] = await api.getSelects(() =>
+      dispatch(fail())
+    )
 
     return dispatch(load(leftId, rightId, selects))
   }
@@ -33,7 +41,9 @@ export const load: ActionCreator<ThunkResult<Promise<ActionTypes>>> = (
       payload: [leftId, rightId, selects],
     })
 
-    const paragraphs: IParagraph[] = await api.getList(leftId, rightId)
+    const paragraphs: IParagraph[] = await api.getList(leftId, rightId, () =>
+      dispatch(fail())
+    )
 
     return dispatch(success(paragraphs))
   }
