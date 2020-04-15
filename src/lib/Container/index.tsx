@@ -23,14 +23,11 @@ const Index: React.FC = () => {
   const { id } = useSelector(selectNavigate)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const currentRef = React.useRef<HTMLDivElement>(null)
-  const redrawHighlight = () => {
+
+  React.useLayoutEffect(() => {
     if (currentRef.current) {
       dispatch(highlight(navigateInfo(currentRef.current)))
     }
-  }
-
-  React.useLayoutEffect(() => {
-    redrawHighlight()
   }, [id, redrawIdx])
 
   React.useLayoutEffect(() => {
