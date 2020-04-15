@@ -100,15 +100,19 @@ export const positionsOfChanged = (container: HTMLDivElement): IPosition[] => {
   )
   const scrollStep = container.scrollHeight
 
-  return [...diffs].map((el) => {
+  return [...diffs].reduce((result, el) => {
     const p = closestParagraph(el)
 
-    return {
-      top: (el.offsetTop + p.offsetTop) / scrollStep,
-      height: el.offsetHeight / scrollStep,
-      className: el.className === 'add' ? 'add' : 'change',
+    if (p) {
+      result.push({
+        top: (el.offsetTop + p.offsetTop) / scrollStep,
+        height: el.offsetHeight / scrollStep,
+        className: el.className === 'add' ? 'add' : 'change',
+      })
     }
-  })
+
+    return result
+  }, [])
 }
 
 export const drawMap = (
