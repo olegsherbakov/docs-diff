@@ -1,4 +1,4 @@
-import { IOption, IParagraph, IPosition } from '@core/types'
+import { IOption, IParagraph, IPosition, INavigateInfo } from '@core/types'
 
 export const isActual = (
   left: IOption[],
@@ -49,12 +49,6 @@ export const navigateId = (
         : result,
     undefined as number
   )
-
-interface INavigateInfo {
-  top: number
-  left: number
-  right: number
-}
 
 export const navigateInfo = (div: HTMLDivElement): INavigateInfo => {
   const leftElement = div.childNodes[0] as HTMLDivElement

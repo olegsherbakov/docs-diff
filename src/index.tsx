@@ -2,18 +2,10 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { IState, IApi } from '@core/types'
-import { fail } from '@core/actions'
+import { IDocsDiff, IApi } from '@core/types'
+import { forceUpdate, fail } from '@core/actions'
 import configStore from '@core/store'
 import App from '@lib/App'
-
-export interface IDocsDiff {
-  state?: IState
-  target: HTMLElement
-  onCreate?: Function
-  loadSelects?: Function
-  loadList: Function
-}
 
 const createApi = (
   loadSelects: Function,
@@ -45,10 +37,12 @@ export default function ({
 
   ReactDOM.render(
     <Provider store={store}>
-      <App hookUpdate={hookUpdate} />
+      <App />
     </Provider>,
     target
   )
+
+  hookUpdate(() => store.dispatch(forceUpdate()))
 
   return function () {
     if (destroyFn) {

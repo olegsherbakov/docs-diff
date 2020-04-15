@@ -3,6 +3,7 @@ import { Reducer } from 'redux'
 import { ACTIONS, ISystem, ActionTypes } from '@core/types'
 
 const initialState: ISystem = {
+  redrawIdx: 0,
   isLoaded: false,
   isLoading: false,
   error: ``,
@@ -28,6 +29,12 @@ const reducer: Reducer<ISystem> = function (
         isLoaded: false,
         isLoading: false,
         error: action.payload.reason,
+      }
+    }
+    case ACTIONS.UPDATE: {
+      return {
+        ...state,
+        redrawIdx: state.redrawIdx + 1,
       }
     }
   }

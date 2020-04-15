@@ -1,3 +1,11 @@
+export interface IDocsDiff {
+  state?: IState
+  target: HTMLElement
+  onCreate?: Function
+  loadSelects?: Function
+  loadList: Function
+}
+
 export interface IState {
   system: ISystem
   selects: ISelects
@@ -8,6 +16,7 @@ export interface IState {
 }
 
 export interface ISystem {
+  redrawIdx: number
   isLoading: boolean
   isLoaded: boolean
   error: string
@@ -66,6 +75,12 @@ export interface IPosition {
   className: 'add' | `change`
 }
 
+export interface INavigateInfo {
+  top: number
+  left: number
+  right: number
+}
+
 export enum ACTIONS {
   LOAD,
   SUCCESS,
@@ -74,6 +89,7 @@ export enum ACTIONS {
   CHECK,
   HIGHLIGHT,
   SCROLLMAP,
+  UPDATE,
 }
 
 interface ILoadAction {
@@ -114,6 +130,10 @@ interface IScrollmapAction {
   payload: IPosition[]
 }
 
+interface IUpdateAction {
+  type: typeof ACTIONS.UPDATE
+}
+
 interface ICheckAction {
   type: typeof ACTIONS.CHECK
   payload: {
@@ -129,6 +149,7 @@ export type ActionTypes =
   | INavigateAction
   | IHighlightAction
   | IScrollmapAction
+  | IUpdateAction
   | ICheckAction
 
 export interface IApi extends Object {

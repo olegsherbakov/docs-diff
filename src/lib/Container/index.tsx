@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectError, selectNavigate, selectItems } from '@core/selectors'
+import {
+  selectRedrawIdx,
+  selectError,
+  selectNavigate,
+  selectItems,
+} from '@core/selectors'
 import { highlight, scrollmap } from '@core/actions'
 import { navigateInfo, scrollTo, positionsOfChanged } from '@utils/.'
 import Legend from '@lib/Legend'
@@ -10,40 +15,35 @@ import Highlight from '@lib/Highlight'
 import ScrollPanel from '@lib/ScrollPanel'
 import './styles.scss'
 
-interface IContainer {
-  ignored: number
-}
-
-const Index: React.FC<IContainer> = ({ ignored }) => {
+const Index: React.FC = () => {
   const dispatch = useDispatch()
+  const redrawIdx = useSelector(selectRedrawIdx)
   const error = useSelector(selectError)
   const items = useSelector(selectItems)
-  const { id: navigateId } = useSelector(selectNavigate)
+  const { id } = useSelector(selectNavigate)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const currentRef = React.useRef<HTMLDivElement>(null)
   const redrawHighlight = () => {
     if (currentRef.current) {
-      const navigate = navigateInfo(currentRef.current)
-
-      dispatch(highlight(navigate.top, navigate.left, navigate.right))
+      dispatch(highlight(navigateInfo(currentRef.current)))
     }
   }
 
   React.useLayoutEffect(() => {
     redrawHighlight()
-  }, [navigateId, ignored])
+  }, [id, redrawIdx])
 
   React.useLayoutEffect(() => {
-    if (navigateId && containerRef.current && currentRef.current) {
+    if (id && containerRef.current && currentRef.current) {
       scrollTo(containerRef.current, currentRef.current)
     }
-  }, [navigateId])
+  }, [id])
 
   React.useLayoutEffect(() => {
     if (items.length) {
       dispatch(scrollmap(positionsOfChanged(containerRef.current)))
     }
-  }, [items, ignored])
+  }, [items, redrawIdx])
 
   if (error) {
     return null

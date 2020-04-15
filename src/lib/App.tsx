@@ -11,20 +11,13 @@ import Progress from '@lib/Progress'
 import Footer from '@lib/Footer'
 import Errors from '@lib/Errors'
 
-interface IApp {
-  hookUpdate: Function
-}
-
-const App: React.FC<IApp> = ({ hookUpdate }) => {
+const App: React.FC = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
-  const [ignored, forceUpdate] = React.useReducer((x) => x + 1, 0)
 
   React.useLayoutEffect(() => {
     dispatch(init())
-
-    hookUpdate(() => forceUpdate())
-  }, [dispatch])
+  }, [])
 
   if (isLoading) {
     return <Progress />
@@ -32,7 +25,7 @@ const App: React.FC<IApp> = ({ hookUpdate }) => {
 
   return (
     <>
-      <Container ignored={ignored} />
+      <Container />
       <Header />
       <Footer />
       <Errors />

@@ -22,7 +22,7 @@ const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   React.useLayoutEffect(() => {
     dispatch(navigate())
-  }, [dispatch])
+  }, [])
 
   return (
     <div className="list">

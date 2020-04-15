@@ -7,6 +7,7 @@ import {
   IApi,
   IParagraph,
   IOption,
+  INavigateInfo,
   ActionTypes,
 } from '@core/types'
 import { changedMap, navigateId, isActive } from '@utils/.'
@@ -125,22 +126,24 @@ export const navigateNext: ActionCreator<ThunkResult<ActionTypes>> = () => {
   }
 }
 
-export const highlight: ActionCreator<ActionTypes> = (
-  top: number,
-  leftHeight: number,
-  rightHeight: number
-) => {
-  return {
-    type: ACTIONS.HIGHLIGHT,
-    payload: {
-      top,
-      leftHeight,
-      rightHeight,
-    },
-  }
-}
+export const highlight: ActionCreator<ActionTypes> = ({
+  top,
+  left: leftHeight,
+  right: rightHeight,
+}: INavigateInfo) => ({
+  type: ACTIONS.HIGHLIGHT,
+  payload: {
+    top,
+    leftHeight,
+    rightHeight,
+  },
+})
 
 export const scrollmap: ActionCreator<ActionTypes> = (map) => ({
   type: ACTIONS.SCROLLMAP,
   payload: map,
+})
+
+export const forceUpdate: ActionCreator<ActionTypes> = () => ({
+  type: ACTIONS.UPDATE,
 })
