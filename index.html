@@ -27,17 +27,30 @@
       ;(function () {
         DocsDiff.default({
           target: document.getElementById('app'),
-          onCreate: function (forceUpdate) {
+          onCreate: function (forceUpdate, prev, next) {
             window.addEventListener(`resize`, forceUpdate);
+
+            function handleKeys(e) {
+              if (e.keyCode === 37) {
+                // left
+                prev()
+              }
+              if (e.keyCode === 39) {
+                // right
+                next()
+              }
+            }
+
+            window.addEventListener('keydown', handleKeys);
 
             return function (target) {
               console.log('target before unmount the component', target);
               window.removeEventListener(`resize`, forceUpdate);
+              window.removeEventListener('keydown', handleKeys);
             }
           },
           loadSelects: function(failFn) {
-            var selects = [
-                [
+            var selects = [[
                   {
                     id: 1,
                     name: `doc1`,
@@ -59,8 +72,7 @@
                     id: 4,
                     name: `doc4`,
                     isActual: false,
-                  },
-                ],
+                  }]
               ],
               leftId = selects[0][0].id,
               rightId = selects[1][0].id;

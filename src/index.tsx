@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import { IDocsDiff, IApi } from '@core/types'
-import { forceUpdate, fail } from '@core/actions'
+import { navigatePrev, forceUpdate, navigateNext, fail } from '@core/actions'
 import configStore from '@core/store'
 import App from '@lib/App'
 
@@ -31,9 +31,6 @@ export default function ({
     store.dispatch(fail(reason))
   )
   const store = configStore(state, api)
-  const hookUpdate = (forceUpdate: Function): void => {
-    destroyFn = onCreate(forceUpdate)
-  }
 
   ReactDOM.render(
     <Provider store={store}>
@@ -42,7 +39,15 @@ export default function ({
     target
   )
 
-  hookUpdate(() => store.dispatch(forceUpdate()))
+  if (onCreate) {
+    destroyFn = onCreate(
+      () => store.dispatch(forceUpdate()),
+      // @ts-ignore
+      () => store.dispatch(navigatePrev()),
+      // @ts-ignore
+      () => store.dispatch(navigateNext())
+    )
+  }
 
   return function () {
     if (destroyFn) {
