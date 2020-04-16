@@ -87,10 +87,10 @@
         });
 
         setTimeout(function () {
-          docsDiffDestroy();
-          application.off();
-
-          alert('unmount after 100 seconds... this is demo access ;)');
+          if (confirm('Clear all?')) {
+            docsDiffDestroy();
+            application.off();
+          }
         }, 100 * 1000);
       })();
     </script>
