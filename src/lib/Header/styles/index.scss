@@ -1,6 +1,6 @@
 @import '~@lib/_styles/variables.scss';
 
-.header {
+.Header {
   position: absolute;
   top: 0;
   left: 0;
@@ -11,17 +11,16 @@
   line-height: 40px;
   border-bottom: 1px solid #a6a8ab;
   padding: 0 0 0 20px;
-
-  .left,
-  .right {
-    height: 100%;
-    width: 50%;
-    float: left;
-    padding-left: 36px;
-    background: url(./isnt-actual-icon.png) no-repeat center left;
-
-    &.actual {
-      background-image: url(./is-actual-icon.png);
-    }
-  }
+  clear: both;
+}
+.Left,
+.Right {
+  height: 100%;
+  width: 50%;
+  float: left;
+  padding-left: 36px;
+  background: url(./isnt-actual-icon.png) no-repeat center left;
+}
+.Actual {
+  background-image: url(./is-actual-icon.png);
 }

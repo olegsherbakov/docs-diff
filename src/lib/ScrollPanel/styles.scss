@@ -1,6 +1,6 @@
 @import '~@lib/_styles/variables.scss';
 
-.scroll {
+.Scroll {
   pointer-events: none;
   opacity: .5;
   position: fixed;
@@ -11,13 +11,13 @@
   border-right: 1px solid $gray;
   background-color: $gray;
 
-  .bar {
-    position: absolute;
-    background-color: orangeRed;
-    opacity: 0.6;
-    width: 100%;
-  }
   canvas {
     height: 100%;
   }
+}
+.Bar {
+  position: absolute;
+  background-color: orangeRed;
+  opacity: 0.6;
+  width: 100%;
 }

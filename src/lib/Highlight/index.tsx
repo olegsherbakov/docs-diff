@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { selectHighlight } from '@core/selectors'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const highlight = useSelector(selectHighlight)
@@ -15,16 +15,16 @@ const Index: React.FC = () => {
   const transform = `translateY(${top}px)`
 
   return (
-    <div className="highlight">
+    <div className={styles.Highlight}>
       <div
-        className="left"
+        className={styles.Left}
         style={{
           height: leftHeight,
           transform,
         }}
       />
       <div
-        className="right"
+        className={styles.Right}
         style={{
           height: rightHeight,
           transform,

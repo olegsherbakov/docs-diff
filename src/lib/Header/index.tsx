@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import { selectSelects } from '@core/selectors'
 import { change } from '@core/actions'
-import './styles/index.scss'
+import styles from './styles/index.scss'
 
 const Index: React.FC = () => {
   const dispatch = useDispatch()
@@ -25,8 +25,10 @@ const Index: React.FC = () => {
   )
 
   return (
-    <div className="header clear">
-      <div className={cn({ left: true, actual: leftIsActual })}>
+    <div className={styles.Header}>
+      <div
+        className={cn({ [styles.Left]: true, [styles.Actual]: leftIsActual })}
+      >
         <select value={leftSelected} onChange={onChange} data-left="true">
           {left.map(({ id, name }) => (
             <option key={id} value={id}>
@@ -35,7 +37,9 @@ const Index: React.FC = () => {
           ))}
         </select>
       </div>
-      <div className={cn({ right: true, actual: rightIsActual })}>
+      <div
+        className={cn({ [styles.Right]: true, [styles.Actual]: rightIsActual })}
+      >
         <select value={rightSelected} onChange={onChange}>
           {right.map(({ id, name }) => (
             <option key={id} value={id}>

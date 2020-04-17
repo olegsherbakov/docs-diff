@@ -45,10 +45,17 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          'css-modules-typescript-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'sass-loader'
-        ],
+        ]
       }
     ],
   },

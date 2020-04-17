@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import { selectNavigate } from '@core/selectors'
 import { navigatePrev, navigateNext } from '@core/actions'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const dispatch = useDispatch()
@@ -17,15 +17,18 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="footer l-ta-center">
+    <div className={styles.Footer}>
       <span
-        className={cn({ prev: true, disable: !leftIsActive })}
+        className={cn({ [styles.Prev]: true, [styles.Disable]: !leftIsActive })}
         onClick={onClickPrev}
       >
         « предыдущее изменение
       </span>
       <span
-        className={cn({ next: true, disable: !rightIsActive })}
+        className={cn({
+          [styles.Next]: true,
+          [styles.Disable]: !rightIsActive,
+        })}
         onClick={onClickNext}
       >
         следующее изменение »

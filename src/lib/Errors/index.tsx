@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { selectError } from '@core/selectors'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const error = useSelector(selectError)
@@ -12,7 +12,7 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="errors l-ta-center">
+    <div className={styles.Error}>
       <p>Произошла ошибка, попробуйте повторить операцию позже.</p>
       <p>{error}</p>
     </div>

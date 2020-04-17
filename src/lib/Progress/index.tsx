@@ -2,8 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 
 import { selectIsLoading } from '@core/selectors'
-
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const isLoading = useSelector(selectIsLoading)
@@ -13,9 +12,12 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="progress l-ta-center">
+    <div className={styles.Progress}>
       <p>
-        <span className="label"> Выполняется сравнение текстов редакций</span>
+        <span className={styles.Label}>
+          {' '}
+          Выполняется сравнение текстов редакций
+        </span>
       </p>
       <p>
         В больших текстах (например, при сравнении редакций Кодексов РФ) эта

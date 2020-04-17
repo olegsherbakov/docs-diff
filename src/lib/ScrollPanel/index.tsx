@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { selectScroll } from '@core/selectors'
 import { drawMap } from '@utils/.'
 import Bar from './Bar'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const { map } = useSelector(selectScroll)
@@ -18,7 +18,7 @@ const Index: React.FC = () => {
   }, [map])
 
   return (
-    <div className="scroll" ref={refScroll}>
+    <div className={styles.Scroll} ref={refScroll}>
       <canvas ref={refCanvas} />
       <Bar />
     </div>

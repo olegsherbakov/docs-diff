@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => (
-  <div className="legend l-ta-center">
-    <span className="green">– отличающиеся фрагменты</span>
-    <span className="blue">
+  <div className={styles.Legend}>
+    <span className={styles.Green}>– отличающиеся фрагменты</span>
+    <span className={styles.Blue}>
       – фрагменты, присутствующие только в одной из редакций
     </span>
   </div>

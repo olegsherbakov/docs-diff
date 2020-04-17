@@ -13,7 +13,7 @@ import Legend from '@lib/Legend'
 import List from '@lib/List'
 import Highlight from '@lib/Highlight'
 import ScrollPanel from '@lib/ScrollPanel'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index: React.FC = () => {
   const dispatch = useDispatch()
@@ -47,8 +47,8 @@ const Index: React.FC = () => {
   }
 
   return (
-    <div className="wrapper">
-      <div className="container" ref={containerRef}>
+    <div className={styles.Wrapper}>
+      <div className={styles.Container} ref={containerRef}>
         <Legend />
         <Highlight />
         <List ref={currentRef} />

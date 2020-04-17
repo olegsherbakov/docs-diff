@@ -1,6 +1,6 @@
 @import '~@lib/_styles/variables.scss';
 
-.footer {
+.Footer {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -10,17 +10,16 @@
   background: $gray;
   border-top: 1px solid #a6a8ab;
   user-select: none;
-
-  .prev,
-  .next {
-    line-height: 20px;
-    padding: 0 17px;
-    font-size: 12px;
-    cursor: pointer;
-    color: blue;
-
-    &.disable {
-      color: darkGray;
-    }
-  }
+  text-align: center;
+}
+.Prev,
+.Next {
+  line-height: 20px;
+  padding: 0 17px;
+  font-size: 12px;
+  cursor: pointer;
+  color: blue;
+}
+.Disable {
+  color: darkGray;
 }

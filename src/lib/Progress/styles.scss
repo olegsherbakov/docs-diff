@@ -1,12 +1,12 @@
-.progress {
+.Progress {
   position: absolute;
   width: 100%;
   color: #333;
   margin-left: -20px;
   font-size: 14px;
   padding: 150px 0 12px;
-
-  .label {
-    font-weight: bold;
-  }
+  text-align: center;
+}
+.Label {
+  font-weight: bold;
 }

@@ -5,7 +5,7 @@ import cn from 'classnames'
 import { navigate } from '@core/actions'
 import { selectItems, selectNavigate } from '@core/selectors'
 import { isMark } from '@utils/.'
-import './styles.scss'
+import styles from './styles.scss'
 
 const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
   const dispatch = useDispatch()
@@ -24,29 +24,32 @@ const Index = React.forwardRef<HTMLDivElement>((props, ref) => {
   }, [])
 
   return (
-    <div className="list">
+    <div className={styles.List}>
       {items.map(({ id, left, right, isChanged }) => (
         <div
           key={id}
           data-id={id}
           data-paragraph={true}
           onClick={onClick}
-          className={cn({ paragraph: true, changed: isChanged })}
+          className={cn({
+            [styles.Paragraph]: true,
+            [styles.Changed]: isChanged,
+          })}
           ref={navigateId === id ? ref : undefined}
         >
           <div
-            className="left"
+            className={styles.Left}
             dangerouslySetInnerHTML={{
               __html: left,
             }}
           />
           <div
-            className="right"
+            className={styles.Right}
             dangerouslySetInnerHTML={{
               __html: right,
             }}
           />
-          <div className="clear" />
+          <div className={styles.Clear} />
         </div>
       ))}
     </div>

@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { init } from '@core/actions'
 import { selectIsLoading } from '@core/selectors'
-import './_styles/reset.scss'
-import './_styles/styles.scss'
 import Container from '@lib/Container'
 import Header from '@lib/Header'
 import Progress from '@lib/Progress'

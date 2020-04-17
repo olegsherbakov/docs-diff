@@ -1,6 +1,6 @@
 @import '~@lib/_styles/variables.scss';
 
-.legend {
+.Legend {
   height: 55px;
   font-size: 13px;
   color: #5c5c5c;
@@ -9,28 +9,28 @@
   overflow: visible;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: center;
+}
+.Blue,
+.Green {
+  position: relative;
+  margin-left: 16px;
+  margin-right: 16px;
+  padding-left: 62px;
+  line-height: 22px;
 
-  .blue,
-  .green {
-    position: relative;
-    margin-left: 16px;
-    margin-right: 16px;
-    padding-left: 62px;
-    line-height: 22px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 50px;
-      height: 100%;
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
   }
-  .green::after {
-    background: $green;
-  }
-  .blue::after {
-    background: $blue;
-  }
+}
+.Green::after {
+  background: $green;
+}
+.Blue::after {
+  background: $blue;
 }

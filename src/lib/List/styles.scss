@@ -1,47 +1,47 @@
 @import "~@lib/_styles/variables.scss";
 
-.list {
+.List {
   padding-right: 20px;
+}
+:local(.Paragraph) {
+  p {
+    margin: 10px 0;
+    padding: 0 0;
+    line-height: 1.25em;
 
-  .paragraph {
-    .left,
-    .right {
-      position: relative;
-      overflow-x: hidden;
-      padding: 6px 16px;
-      width: 49%;
-    }
-    .left {
-      float: left;
-    }
-    .right {
-      float: right;
-    }
-    &.changed {
-      .change {
-        background-color: $green;
-      }
-      .add {
-        background-color: #c4e5fa;
-      }
-      .add,
-      .change {
-        cursor: pointer;
-      }
-    }
-    p {
-      margin: 10px 0;
-      padding: 0 0;
-      line-height: 1.25em;
-
-      &.sep {
-        margin: 2px 0;
-        padding: 0 16px;
-        clear: both;
-      }
-    }
-    a {
-      outline: none;
+    &:global(.sep) {
+      margin: 2px 0;
+      padding: 0 16px;
+      clear: both;
     }
   }
+  a {
+    outline: none;
+  }
+}
+:local(.Changed) {
+  :global(.change) {
+    background-color: $green;
+    cursor: pointer;
+  }
+  :global(.add) {
+    background-color: #c4e5fa;
+    cursor: pointer;
+  }
+}
+.Left,
+.Right {
+  position: relative;
+  overflow-x: hidden;
+  padding: 6px 16px;
+  width: 49%;
+}
+.Left {
+  float: left;
+}
+.Right {
+  float: right;
+}
+.Clear {
+  clear: both;
 }
