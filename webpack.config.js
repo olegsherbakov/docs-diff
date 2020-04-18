@@ -1,8 +1,10 @@
 const path = require('path')
+const yargs = require('yargs')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const isProduction = yargs.argv.p
 
 module.exports = {
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   devtool: 'source-map',
   resolve: {
     alias: {
@@ -24,7 +26,6 @@ module.exports = {
           },
         ],
       },
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
         enforce: 'pre',
         test: /\.js$/,
@@ -49,21 +50,22 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              importLoaders: 1,
+              modules: {
+                localIdentName:
+                  isProduction
+                    ? '[hash:base64:5]'
+                    : '[path][name]__[local]--[hash:base64:5]',
+              },
+              importLoaders: 2,
             },
           },
           'postcss-loader',
           'sass-loader'
-        ]
-      }
+        ],
+      },
     ],
   },
   plugins: [new MiniCssExtractPlugin()],
-  // When importing a module whose path matches one of the following, just
-  // assume a corresponding global variable exists and use that instead.
-  // This is important because it allows us to avoid bundling all of our
-  // dependencies, which allows browsers to cache those libraries between builds.
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
@@ -73,6 +75,6 @@ module.exports = {
   output: {
     library: 'DocsDiff',
     libraryTarget: 'var',
-    filename: 'index.js'
-  }
+    filename: 'index.js',
+  },
 }

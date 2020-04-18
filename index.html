@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="./dist/main.css" />
   </head>
   <body>
-    <div id="app" class="DocsDiff"></div>
+    <div id="app"></div>
+    <button id="clear">remove</button>
 
     <!-- Dependencies -->
     <script src="./node_modules/react/umd/react.development.js"></script>
@@ -27,73 +28,55 @@
     <script src="./data.json.js"></script>
 
     <script>
-      (function () {
-        /* test example */
-        var myApplication = function () {
-          var _forceUpdate, _prev, _next;
-          var _keysHandler = function (e) {
-            if (e.keyCode === 37) {
-              // left
-              _prev();
-            }
-            if (e.keyCode === 39) {
-              // right
-              _next();
-            }
-          };
-
-          return {
-            on: function (forceUpdate, prev, next) {
-              _forceUpdate = forceUpdate;
-              _prev = prev;
-              _next = next;
-
-              window.addEventListener(`resize`, _forceUpdate);
-              window.addEventListener('keydown', _keysHandler);
-            },
-            off: function () {
-              window.removeEventListener(`resize`, _forceUpdate);
-              window.removeEventListener('keydown', _keysHandler);
-
-              _forceUpdate = undefined;
-              _prev = undefined;
-              _next = undefined;
-            }
-          };
+      /* usage example */
+      var myApplication = function () {
+        var _forceUpdate, _prev, _next;
+        var _keysHandler = function (e) {
+          if (e.keyCode === 37) {
+            _prev();
+          }
+          if (e.keyCode === 39) {
+            _next();
+          }
         };
-        var application = myApplication();
-        var docsDiffDestroy = DocsDiff.default({
-          target: document.getElementById('app'),
-          onCreate: function (forceUpdate, prev, next) {
-            application.on(forceUpdate, prev, next);
-          },
-          loadSelects: function (failFn) {
-            return [selects, leftId, rightId];
-            /* or return promise for example
-            return new Promise(resolve => {
-              setTimeout(function() {
-                resolve([selects, leftId, rightId]);
-              }, 3333);
-            });*/
-          },
-          loadList: function (leftId, rightId, failFn) {
-            return paragraphs;
-            /* return promise for for example
-            return new Promise(resolve => {
-              setTimeout(function() {
-                resolve(paragraphs);
-              }, 3333);
-            });*/
-          }
-        });
 
-        setTimeout(function () {
-          if (confirm('Clear all?')) {
-            docsDiffDestroy();
-            application.off();
+        return {
+          on: function (forceUpdate, prev, next) {
+            _forceUpdate = forceUpdate;
+            _prev = prev;
+            _next = next;
+
+            window.addEventListener(`resize`, _forceUpdate);
+            window.addEventListener('keydown', _keysHandler);
+          },
+          off: function () {
+            window.removeEventListener(`resize`, _forceUpdate);
+            window.removeEventListener('keydown', _keysHandler);
+
+            _forceUpdate = undefined;
+            _prev = undefined;
+            _next = undefined;
           }
-        }, 100 * 1000);
-      })();
+        };
+      };
+      var application = myApplication();
+      var docsDiffDestroy = DocsDiff.default({
+        target: document.getElementById('app'),
+        onCreate: function (forceUpdate, prev, next) {
+          application.on(forceUpdate, prev, next);
+        },
+        loadSelects: function (failFn) {
+          return [selects, leftId, rightId];
+        },
+        loadList: function (leftId, rightId, failFn) {
+          return paragraphs;
+        }
+      });
+
+      document.getElementById('clear').addEventListener('click', function () {
+        docsDiffDestroy();
+        application.off();
+      });
     </script>
   </body>
 </html>

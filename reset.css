@@ -365,6 +365,21 @@ textarea {
   padding: 0.2em 0;
 }
 
+/**
+  globals
+ */
+
 * {
   box-sizing: border-box;
+}
+
+#clear {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  opacity: .3;
+}
+
+#clear:hover {
+  opacity: 1;
 }
